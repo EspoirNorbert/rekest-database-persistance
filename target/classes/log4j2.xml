@@ -3,7 +3,7 @@
 	
 	<!-- Définition de propriétés pour réutilisation -->
 	<Properties>
-		<Property name="filename">starter-project.log</Property> 
+		<Property name="filename">rekest.log</Property> 
 	</Properties>
 	
 	<!-- Définition des 'Appenders', destination et format des messages -->
@@ -23,7 +23,7 @@
     	niveau de journalisation -->
     <Loggers>		
 		<!-- Il faut au moins un logger 'racine' -->
-        <Logger name="com.app.utils.HibernateSession" level="debug" additivity="false">
+        <Logger name="com.agrosoft.address.util.HibernateSession" level="debug" additivity="false">
             <AppenderRef ref="sysout"/>
         </Logger>
         
