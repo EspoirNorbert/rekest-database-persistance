@@ -58,3 +58,4 @@ public interface IDao extends IDaoAdministrateur {
 	 */
 	public Object find(Class<?> entityClass, String whereClause) ;
 }
+//Test du GIT avec eclipse
