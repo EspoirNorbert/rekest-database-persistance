@@ -74,11 +74,11 @@ public class HibernateDao implements IDao{
 	 *see com.app.sms.dao.IDao#find(java.lang.Class, java.lang.Integer)
 	 */
 	@Override
-	public Object find(Class<?> entityClass, Integer primaryKey)  {
+	public Object find(Object entityClass, Integer primaryKey)  {
 		Object entity = null;
 		try {
 			session = HibernateSession.getSession();
-			entity = session.find(entityClass, primaryKey);
+			entity = session.find(entityClass.getClass(), primaryKey);
 
 			if (entity != null) logger.info("Record Successfully read.");
 			else logger.info("Record not found.");
@@ -129,11 +129,11 @@ public class HibernateDao implements IDao{
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Object> list (Class<?> entityClass) {
+	public List<Object> list (Object entityClass) {
 		List<Object> entities = null;
 		try {
 			session = HibernateSession.getSession();
-			Query<?> query = session.createQuery("From " + entityClass.getName());
+			Query<?> query = session.createQuery("From " + entityClass.getClass().getSimpleName());
 
 			entities = (List<Object>) query.getResultList();
 			if (entities != null) logger.info("Records Successfully read.");
@@ -209,4 +209,5 @@ public class HibernateDao implements IDao{
 		return utilisateur;
 		
 	}
+
 }

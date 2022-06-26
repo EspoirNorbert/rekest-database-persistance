@@ -3,6 +3,7 @@ package com.rekest.dao;
 import java.util.List;
 
 import com.rekest.administrateur.dao.IDaoAdministrateur;
+import com.rekest.entities.employes.Utilisateur;
 
 /**
  * @author Illiassou
@@ -28,14 +29,14 @@ public interface IDao extends IDaoAdministrateur {
 	 * @return
 	 * @ 
 	 */
-	public Object find(Class<?> entityClass, Integer primaryKey) ;
+	public Object find(Object entityClass, Integer primaryKey) ;
 	
 	/**
 	 * @param entityClass
 	 * @return
 	 * @ 
 	 */
-	public List<Object> list(Class<?> entityClass) ;
+	public List<Object> list(Object entityClass) ;
 	
 	/**
 	 * @param entityClass
@@ -58,4 +59,3 @@ public interface IDao extends IDaoAdministrateur {
 	 */
 	public Object find(Class<?> entityClass, String whereClause) ;
 }
-//Test du GIT avec eclipse

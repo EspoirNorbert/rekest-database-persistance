@@ -1,5 +1,8 @@
 package com.rekest.runtime;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.rekest.dao.IDao;
 import com.rekest.dao.impl.HibernateDao;
 import com.rekest.entities.Role;
@@ -43,10 +46,7 @@ public class MainUI {
 		
 		Administrateur seynabou = new Administrateur("Seynabou","Diagne","nabou","nabou");
 		dao.save(seynabou);
-		
-		System.out.println(dao.validateCredential("espoir-b", "passer"));
-		System.out.println(dao.validateCredential("nabou", "nabou"));
-		
+
 		
 	}
 }
