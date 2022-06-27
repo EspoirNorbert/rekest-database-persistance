@@ -1,5 +1,7 @@
 package com.rekest.entities;
 
+import java.sql.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,6 +16,8 @@ public class Notification {
 	private int id;
 	
 	private String message;
+	private boolean isRead = false;
+	private Date createAt;
 	
 	public Notification(String message) {
 		this.message = message;
@@ -34,4 +38,21 @@ public class Notification {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
+	public boolean isRead() {
+		return isRead;
+	}
+
+	public void setRead(boolean isRead) {
+		this.isRead = isRead;
+	}
+
+	public Date getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(Date createat) {
+		this.createAt = createat;
+	}
+	
 }

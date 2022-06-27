@@ -55,7 +55,7 @@ public class Service {
 	public void addEmploye(Employe employe) {
 		employes.add(employe);
 		
-		//employe.setService(this);
+		
 	}
 	
 	public ChefService getChefService() {
@@ -65,6 +65,6 @@ public class Service {
 	public void setChefService(ChefService chefService) {
 		this.chefService = chefService;
 		
-		//chefService.setService(this);
+		
 	}
 }

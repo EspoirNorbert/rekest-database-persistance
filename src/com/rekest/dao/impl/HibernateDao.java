@@ -33,8 +33,8 @@ public class HibernateDao implements IDao{
 	 *see com.app.sms.dao.IDao#save(java.lang.Object)
 	 */
 	@Override
-	public void save(Object entity) {
-		try {
+	public void save(Object entity) throws Exception{
+	
 			session = HibernateSession.getSession();
 			
 			//Creating Transaction Object 
@@ -45,17 +45,14 @@ public class HibernateDao implements IDao{
 			// Transaction Is Committed To Database
 			transaction.commit();
 			
-		} catch (Exception exception) {
-			logger.error(exception.getMessage());
-		}
 	}
 
 	/* (non-Javadoc)
 	 *see com.app.sms.dao.IDao#delete(java.lang.Object)
 	 */
 	@Override
-	public void delete(Object entity) {
-		try {
+	public void delete(Object entity) throws Exception{
+		
 			session = HibernateSession.getSession();
 			
 			//Creating Transaction Object
@@ -65,26 +62,19 @@ public class HibernateDao implements IDao{
 			// Transaction Is Committed To Database
 			transaction.commit();
 			logger.info("Record is Successfully deleted.");
-		} catch (Exception exception) {
-			logger.error(exception.getMessage());
-		}
 	}
 
 	/* (non-Javadoc)
 	 *see com.app.sms.dao.IDao#find(java.lang.Class, java.lang.Integer)
 	 */
 	@Override
-	public Object find(Object entityClass, Integer primaryKey)  {
+	public Object find(Object entityClass, Integer primaryKey) throws Exception{
 		Object entity = null;
-		try {
 			session = HibernateSession.getSession();
 			entity = session.find(entityClass.getClass(), primaryKey);
 
 			if (entity != null) logger.info("Record Successfully read.");
 			else logger.info("Record not found.");
-		} catch (Exception exception) {
-			logger.error(exception.getMessage());
-		}
 		return entity;
 	}
 	
@@ -92,9 +82,9 @@ public class HibernateDao implements IDao{
 	 *see com.app.sms.dao.IDao#find(java.lang.Class, java.lang.String)
 	 */
 	@Override
-	public Object find(Class<?> entityClass, String whereClause)  {
+	public Object find(Class<?> entityClass, String whereClause) throws Exception {
 		Object entity = null;
-		try {
+		
 			session = HibernateSession.getSession();							
 			
 			Query<?> query = session.createQuery("From " + entityClass.getName() + " " + whereClause); 
@@ -102,15 +92,14 @@ public class HibernateDao implements IDao{
 			
 			if (entity != null) logger.info("Record Successfully read.");
 			else logger.info("Record not found.");
-		} catch (Exception ignored) {}
 		return entity;
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Object> list(Class<?> entityClass, String whereClause)  {
+	public List<Object> list(Class<?> entityClass, String whereClause) throws Exception {
 		List<Object> entities = null;
-		try {
+		
 			session = HibernateSession.getSession();
 
 			Query<?> query = session.createQuery("From " + entityClass.getName() + " " + whereClause); 
@@ -118,9 +107,7 @@ public class HibernateDao implements IDao{
 			
 			if (entities != null) logger.info("Records Successfully read.");
 			else logger.info("Records not found.");
-		} catch (Exception exception) {
-			logger.error(exception.getMessage());
-		}
+			
 		return entities;
 	}
 	
@@ -129,18 +116,15 @@ public class HibernateDao implements IDao{
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Object> list (Object entityClass) {
+	public List<Object> list (Object entityClass) throws Exception{
 		List<Object> entities = null;
-		try {
+		
 			session = HibernateSession.getSession();
 			Query<?> query = session.createQuery("From " + entityClass.getClass().getSimpleName());
 
 			entities = (List<Object>) query.getResultList();
 			if (entities != null) logger.info("Records Successfully read.");
 			else logger.info("Records not found.");
-		} catch (Exception exception) {
-			logger.error(exception.getMessage());
-		}
 		return entities;
 	}
 
@@ -148,8 +132,8 @@ public class HibernateDao implements IDao{
 	 *see com.app.sms.dao.IDao#update(java.lang.Object)
 	 */
 	@Override
-	public void update(Object entity) {
-		try {
+	public void update(Object entity) throws Exception{
+		
 			session = HibernateSession.getSession();
 	
 			//Creating Transaction Object  
@@ -160,9 +144,6 @@ public class HibernateDao implements IDao{
 			// Transaction Is Committed To Database
 			transaction.commit();
 			logger.info("Record Successfully updated.");
-		} catch (Exception exception) {
-			 logger.error(exception.getMessage());
-		}
 	}
 	
 	public static void closeSession() {
@@ -170,21 +151,21 @@ public class HibernateDao implements IDao{
 	}
 	
 	@Override
-	public void enableAccount(Utilisateur entity) {
+	public void enableAccount(Utilisateur entity) throws Exception{
 		entity.setEnable(true);
 		this.update(entity);
 		
 	}
 
 	@Override
-	public void disableAccount(Utilisateur entity) {
+	public void disableAccount(Utilisateur entity) throws Exception{
 		entity.setEnable(false);
 		this.update(entity);
 		
 	}
 
 	@Override
-	public void associateService(Employe employe, Service service) {
+	public void associateService(Employe employe, Service service) throws Exception{
 		
 		service.addEmploye(employe);
 		this.update(service);
@@ -192,10 +173,10 @@ public class HibernateDao implements IDao{
 	}
 
 	@Override
-	public Object validateCredential(String login, String password) {
+	public Object validateCredential(String login, String password)  throws Exception{
 		Object utilisateur = null;
 		String whereClause = "where login = " + "'"+login+"'"+ " and password = " +"'"+password+"'"; 
-		try {
+		
 			session = HibernateSession.getSession();
 
 			@SuppressWarnings("deprecation")
@@ -203,9 +184,7 @@ public class HibernateDao implements IDao{
 			utilisateur =  query.uniqueResult();
 			if (utilisateur != null) logger.info("Utilisateur trouver !");
 			else logger.info("utilisateur non");
-		} catch (Exception exception) {
-			logger.error(exception.getMessage());
-		}
+
 		return utilisateur;
 		
 	}

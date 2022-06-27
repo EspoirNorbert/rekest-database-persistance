@@ -1,5 +1,6 @@
 package com.rekest.entities;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,10 @@ public class Demande {
     @GeneratedValue(strategy = GenerationType.IDENTITY) 
 	@Column(name="id_demande")
 	private int id;
+	
+	private String etat;
+	private Date  createdAt;
+	private Date updatedAt;
 	
 	@OneToOne(targetEntity=Produit.class)
 	private Produit produit;
@@ -42,4 +47,29 @@ public class Demande {
 	public void setProduit(Produit produit) {
 		this.produit = produit;
 	}
+
+	public String getEtat() {
+		return etat;
+	}
+
+	public void setEtat(String etat) {
+		this.etat = etat;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+	
 }

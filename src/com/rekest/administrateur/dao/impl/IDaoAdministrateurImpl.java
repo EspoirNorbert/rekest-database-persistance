@@ -8,8 +8,6 @@ import com.rekest.entities.employes.Utilisateur;
 
 public class IDaoAdministrateurImpl implements IDaoAdministrateur {
 
-	private static Session session = null;
-	private static Transaction transaction = null;
 	private static IDaoAdministrateurImpl daoAdministrateurInstance = null;
 	
 	public static IDaoAdministrateurImpl getCurrentInstance () {

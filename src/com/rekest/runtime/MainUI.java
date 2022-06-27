@@ -1,8 +1,5 @@
 package com.rekest.runtime;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.rekest.dao.IDao;
 import com.rekest.dao.impl.HibernateDao;
 import com.rekest.entities.Role;
@@ -17,36 +14,41 @@ public class MainUI {
 		
 		IDao dao = HibernateDao.getCurrentInstance();
 		ChefService chefService = new ChefService("BIPOMBO", "Espoir", "espoir-b", "passer");
-		dao.save(chefService);
 		
-		// creer service 
-		Service serviceEntreprise = new Service ("Service Informatique");		
-		dao.save(serviceEntreprise);
-		
-		
-		Utilisateur utilisateur = new Utilisateur("AKINOCHO", "Ghislain", "ghislain-a", "q@$$m0rb");
-		dao.save(utilisateur);
-		
-		Role gerant = new Role("Gerant system");
-		Role superviseur = new Role("Superviseur system");
-		dao.save(superviseur);
-		dao.save(gerant);
-		gerant.setIntitule("Nouvelle modification");
-		dao.update(gerant);
-		dao.delete(superviseur);
-		
-		
-		dao.associateService(utilisateur, serviceEntreprise);
-		Service infographie = new Service("Infographie");
-		dao.associateService(utilisateur, infographie);
-		dao.associateService(chefService, infographie);
-		
-		dao.enableAccount(utilisateur);
-		dao.disableAccount(chefService);
-		
-		Administrateur seynabou = new Administrateur("Seynabou","Diagne","nabou","nabou");
-		dao.save(seynabou);
+		try {
+			
+			dao.save(chefService);
+			Service serviceEntreprise = new Service ("Service Informatique");		
+			dao.save(serviceEntreprise);
+			
+			
+			Utilisateur utilisateur = new Utilisateur("AKINOCHO", "Ghislain", "ghislain-a", "q@$$m0rb");
+			dao.save(utilisateur);
+			
+			Role gerant = new Role("Gerant system");
+			Role superviseur = new Role("Superviseur system");
+			dao.save(superviseur);
+			dao.save(gerant);
+			gerant.setIntitule("Nouvelle modification");
+			dao.update(gerant);
+			dao.delete(superviseur);
+			
+			
+			dao.associateService(utilisateur, serviceEntreprise);
+			Service infographie = new Service("Infographie");
+			dao.associateService(utilisateur, infographie);
+			dao.associateService(chefService, infographie);
+			
+			dao.enableAccount(utilisateur);
+			dao.disableAccount(chefService);
+			
+			Administrateur seynabou = new Administrateur("Seynabou","Diagne","nabou","nabou");
+			dao.save(seynabou);
 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		
 	}
 }

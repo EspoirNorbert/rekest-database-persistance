@@ -21,7 +21,9 @@ public class Employe {
 	protected int id;
 	protected String nom;
 	protected String prenom;
-	
+	protected String telephone;
+	protected String email;
+	protected String adresse;
 	@Column(name="employe_profil", insertable=false, updatable=false)
 	protected String employeProfil;
 	
@@ -53,4 +55,29 @@ public class Employe {
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
+
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
+	}
+	
 }

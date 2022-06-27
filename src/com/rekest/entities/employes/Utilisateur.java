@@ -1,5 +1,6 @@
 package com.rekest.entities.employes;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,13 +20,14 @@ public class Utilisateur extends Employe {
 	protected String login;
 	protected String password;
 	protected boolean isEnable = true;
+	protected Date createdAt;
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="utilisateur_id")
 	private List<Notification> notifications = new ArrayList<>();
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="utilisateur_id")
-	private List<Demande> demandes_creees = new ArrayList<>();
+	private List<Demande> demandesCreees = new ArrayList<>();
 	
 	@ManyToMany(targetEntity=Role.class, cascade=CascadeType.ALL)
 	protected List<Role> roles = new ArrayList<>();
@@ -63,10 +65,19 @@ public class Utilisateur extends Employe {
 	}
 
 	public void addDemandeCreee (Demande demande) {
-		demandes_creees.add(demande);
+		demandesCreees.add(demande);
 	}
 	
 	public void addNotification (Notification notification) {
 		notifications.add(notification);
 	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+	
 }
