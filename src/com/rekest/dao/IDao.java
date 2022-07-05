@@ -3,6 +3,7 @@ package com.rekest.dao;
 import java.util.List;
 
 import com.rekest.administrateur.dao.IDaoAdministrateur;
+import com.rekest.entities.Demande;
 
 /**
  * @author Illiassou
@@ -15,6 +16,7 @@ public interface IDao extends IDaoAdministrateur {
 	 * @throws Exception 
 	 * @ 
 	 */
+		
 	public void save(Object obj) throws Exception ;
 
 	/**
@@ -62,4 +64,14 @@ public interface IDao extends IDaoAdministrateur {
 	 * @ 
 	 */
 	public Object find(Class<?> entityClass, String whereClause) throws Exception ;
+	
+	/*
+	 * Method qui permet de s'authentifier
+	 */
+	public default Object validateCredential(String login, String password) throws Exception{return null;};
+	
+	/*
+	 * Method qui permet de definir la reponse de la demande (rejeter , cloturée ...)
+	 */
+	public void requestResponse(Demande demande, String reponse) throws Exception;
 }

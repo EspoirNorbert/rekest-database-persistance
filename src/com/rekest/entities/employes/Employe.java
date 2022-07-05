@@ -1,5 +1,11 @@
 package com.rekest.entities.employes;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.rekest.entities.Demande;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.DiscriminatorType;
@@ -9,6 +15,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
@@ -24,9 +32,13 @@ public class Employe {
 	protected String telephone;
 	protected String email;
 	protected String adresse;
+	
 	@Column(name="employe_profil", insertable=false, updatable=false)
 	protected String employeProfil;
 	
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="employe_id")
+	private List<Demande> demandes_soumises = new ArrayList<>();
 	public Employe(String nom, String prenom) {
 		this.nom = nom;
 		this.prenom = prenom;
@@ -80,4 +92,7 @@ public class Employe {
 		this.adresse = adresse;
 	}
 	
+	public void addDemandeSoumise(Demande demande) {
+		demandes_soumises.add(demande);
+	}
 }

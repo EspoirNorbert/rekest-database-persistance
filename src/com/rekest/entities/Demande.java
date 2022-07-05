@@ -1,8 +1,10 @@
 package com.rekest.entities;
 
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import org.apache.logging.log4j.core.util.SystemClock;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -13,6 +15,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 public class Demande {
@@ -22,7 +26,13 @@ public class Demande {
 	private int id;
 	
 	private String etat;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="createdAt", columnDefinition="TIMESTAMP")
 	private Date  createdAt;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="updatedAt", columnDefinition="TIMESTAMP")
 	private Date updatedAt;
 	
 	@OneToOne(targetEntity=Produit.class)
@@ -36,6 +46,12 @@ public class Demande {
 	@JoinColumn(name="demande_id")
 	private List<Notification> notifications = new ArrayList<>();
 	
+	
+	
+	public Demande() {
+		  this.createdAt = new java.util.Date();
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -72,4 +88,10 @@ public class Demande {
 		this.updatedAt = updatedAt;
 	}
 	
+	public void addNote(Note note) {
+		this.notes.add(note);
+	}
+//	public void addNotification(Notification notification) {
+//		this.notifications.add(notification);
+//	}
 }

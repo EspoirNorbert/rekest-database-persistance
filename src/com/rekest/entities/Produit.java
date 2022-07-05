@@ -14,6 +14,10 @@ public class Produit {
 	private int id;
 	
 	private String nom;
+	private float prix;
+	private int quantite;
+	private String type;
+	private String description;
 	
 	public Produit(String nom) {
 		this.nom = nom;
@@ -34,4 +38,38 @@ public class Produit {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
+
+	public float getPrix() {
+		return prix;
+	}
+
+	public void setPrix(float prix) {
+		this.prix = prix;
+	}
+
+	public int getQuantite() {
+		return quantite;
+	}
+
+	public void setQuantite(int quantite) {
+		this.quantite = quantite;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+	
+	
 }

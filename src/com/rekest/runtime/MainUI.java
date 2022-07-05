@@ -2,6 +2,9 @@ package com.rekest.runtime;
 
 import com.rekest.dao.IDao;
 import com.rekest.dao.impl.HibernateDao;
+import com.rekest.entities.Demande;
+import com.rekest.entities.Note;
+import com.rekest.entities.Produit;
 import com.rekest.entities.Role;
 import com.rekest.entities.Service;
 import com.rekest.entities.employes.Administrateur;
@@ -44,7 +47,18 @@ public class MainUI {
 			
 			Administrateur seynabou = new Administrateur("Seynabou","Diagne","nabou","nabou");
 			dao.save(seynabou);
-
+			
+			Demande demande = new Demande();
+			Produit bol = new Produit("Bol a café");
+			dao.save(bol);
+			demande.setProduit(bol);
+			seynabou.addDemandeCreee(demande);
+			seynabou.addDemandeSoumise(demande);
+			dao.save(demande);
+			Note ras = new Note("RAS");
+			demande.addNote(ras);
+		
+			dao.requestResponse(demande,"Rejeter");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

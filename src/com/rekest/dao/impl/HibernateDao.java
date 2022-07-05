@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import com.rekest.dao.IDao;
+import com.rekest.entities.Demande;
 import com.rekest.entities.Service;
 import com.rekest.entities.employes.Employe;
 import com.rekest.entities.employes.Utilisateur;
@@ -172,6 +173,7 @@ public class HibernateDao implements IDao{
 		
 	}
 
+	
 	@Override
 	public Object validateCredential(String login, String password)  throws Exception{
 		Object utilisateur = null;
@@ -187,6 +189,13 @@ public class HibernateDao implements IDao{
 
 		return utilisateur;
 		
+	}
+
+
+	@Override
+	public void requestResponse(Demande demande, String reponse) throws Exception {
+		demande.setEtat(reponse);
+		this.update(demande);
 	}
 
 }
