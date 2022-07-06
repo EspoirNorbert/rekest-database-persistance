@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Note {
+	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) 
 	@Column(name="id_note")

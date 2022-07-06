@@ -14,13 +14,25 @@ public class Produit {
 	private int id;
 	
 	private String nom;
-	private float prix;
+	private double prix;
 	private int quantite;
 	private String type;
 	private String description;
 	
 	public Produit(String nom) {
 		this.nom = nom;
+	}
+	
+	public Produit(String nom ,double prix, int quantite , String type , String description) {
+		this(nom);
+		this.setPrix(prix);
+		this.setQuantite(quantite);
+		this.type = type;
+		this.description = description;
+	}
+	
+	public Produit(String nom ,double prix, int quantite ) {
+		this(nom , prix ,quantite , ""  , "");
 	}
 
 	public int getId() {
@@ -39,11 +51,11 @@ public class Produit {
 		this.nom = nom;
 	}
 
-	public float getPrix() {
+	public double getPrix() {
 		return prix;
 	}
 
-	public void setPrix(float prix) {
+	public void setPrix(double prix) {
 		this.prix = prix;
 	}
 
@@ -70,6 +82,8 @@ public class Produit {
 	public void setType(String type) {
 		this.type = type;
 	}
+
+	public static void copy(Produit produit, Produit entity) {}
 	
 	
 }

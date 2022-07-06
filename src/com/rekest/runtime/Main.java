@@ -11,7 +11,8 @@ import com.rekest.entities.employes.Administrateur;
 import com.rekest.entities.employes.ChefService;
 import com.rekest.entities.employes.Utilisateur;
 
-public class MainUI {
+
+public class Main {
 	
 	public static void main(String[] args) {
 		

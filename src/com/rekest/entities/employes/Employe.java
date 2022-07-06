@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.rekest.entities.Demande;
+import com.rekest.entities.Service;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -17,6 +18,7 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
 
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
@@ -29,7 +31,9 @@ public class Employe {
 	protected int id;
 	protected String nom;
 	protected String prenom;
+	@Column(unique = true)
 	protected String telephone;
+	@Column(unique = true)
 	protected String email;
 	protected String adresse;
 	
@@ -37,12 +41,26 @@ public class Employe {
 	protected String employeProfil;
 	
 	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="employe_id")
+	@JoinColumn(name="id_employe")
 	private List<Demande> demandes_soumises = new ArrayList<>();
+	
+	@Transient
+	private Service service;
+	
 	public Employe(String nom, String prenom) {
 		this.nom = nom;
 		this.prenom = prenom;
 	}
+	
+	public Employe(String nom, String prenom, String telephone, String email, String adresse) {
+		this.nom = nom;
+		this.prenom = prenom;
+		this.telephone = telephone;
+		this.email = email;
+		this.adresse = adresse;
+	}
+	
+
 	
 	public int getId() {
 		return id;
@@ -95,4 +113,6 @@ public class Employe {
 	public void addDemandeSoumise(Demande demande) {
 		demandes_soumises.add(demande);
 	}
+	
+	public static void copy(Employe employe, Employe entity) {}
 }

@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.logging.log4j.core.util.SystemClock;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,24 +26,24 @@ public class Demande {
 	private String etat;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="createdAt", columnDefinition="TIMESTAMP")
+	@Column(name="created_At", columnDefinition="TIMESTAMP")
 	private Date  createdAt;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="updatedAt", columnDefinition="TIMESTAMP")
+	@Column(name="updated_At", columnDefinition="TIMESTAMP")
 	private Date updatedAt;
 	
 	@OneToOne(targetEntity=Produit.class)
+	@JoinColumn(name = "id_produit")
 	private Produit produit;
 	
 	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="demande_id")
+	@JoinColumn(name="id_demande")
 	private List<Note> notes = new ArrayList<>();
 
 	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="demande_id")
+	@JoinColumn(name="id_demande")
 	private List<Notification> notifications = new ArrayList<>();
-	
 	
 	
 	public Demande() {

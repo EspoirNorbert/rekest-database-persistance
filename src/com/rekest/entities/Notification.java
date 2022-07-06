@@ -2,11 +2,14 @@ package com.rekest.entities;
 
 import java.sql.Date;
 
+import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 public class Notification {
@@ -16,7 +19,13 @@ public class Notification {
 	private int id;
 	
 	private String message;
+	
+	@Column(name = "is_read")
 	private boolean isRead = false;
+	
+	@Basic
+	@Temporal(TemporalType.DATE)
+	@Column(name = "created_at")
 	private Date createAt;
 	
 	public Notification(String message) {

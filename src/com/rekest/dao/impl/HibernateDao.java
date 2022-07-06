@@ -13,189 +13,188 @@ import com.rekest.entities.Demande;
 import com.rekest.entities.Service;
 import com.rekest.entities.employes.Employe;
 import com.rekest.entities.employes.Utilisateur;
+import com.rekest.exceptions.DAOException;
 import com.rekest.utils.HibernateSession;
 
 public class HibernateDao implements IDao{
 
 	public final static Logger logger = LogManager.getLogger(HibernateDao.class);
-	
+
 	private static Session session = null;
 	private static Transaction transaction = null;
 	private static HibernateDao daoInstance = null;
-	
+
 	private HibernateDao() {}
 
 	public static HibernateDao getCurrentInstance () {
 		if (daoInstance == null) daoInstance = new HibernateDao();
 		return daoInstance;
 	}
-	
-	/* (non-Javadoc)
-	 *see com.app.sms.dao.IDao#save(java.lang.Object)
-	 */
-	@Override
-	public void save(Object entity) throws Exception{
-	
-			session = HibernateSession.getSession();
-			
-			//Creating Transaction Object 
-			transaction = session.beginTransaction();
-			logger.info("Begin transaction.");
-			session.persist(entity);
 
-			// Transaction Is Committed To Database
+	@Override
+	public void save(Object entity) throws DAOException{
+		try {
+			session = HibernateSession.getSession();
+			transaction = session.beginTransaction();
+			logger.info("Begin transaction.");// begin transaction
+			session.persist(entity);
 			transaction.commit();
-			
+			logger.info("Record is Successully created");  //  end transaction
+		} catch (Exception e) {
+			throw new DAOException("ERROR:" + e.getClass() + ":" + e.getMessage());
+		}
 	}
 
-	/* (non-Javadoc)
-	 *see com.app.sms.dao.IDao#delete(java.lang.Object)
-	 */
 	@Override
-	public void delete(Object entity) throws Exception{
-		
-			session = HibernateSession.getSession();
-			
-			//Creating Transaction Object
+	public void delete(Object entity) throws DAOException{
+		try {
+			session = HibernateSession.getSession();//Creating Transaction Object
 			transaction = session.beginTransaction();
 			logger.info("Begin transaction.");
 			session.remove(entity);
-			// Transaction Is Committed To Database
-			transaction.commit();
+			transaction.commit(); // Transaction Is Committed To Database
 			logger.info("Record is Successfully deleted.");
+		} catch (Exception e) {
+			throw new DAOException("ERROR:" + e.getClass() + ":" + e.getMessage());
+		}
 	}
 
-	/* (non-Javadoc)
-	 *see com.app.sms.dao.IDao#find(java.lang.Class, java.lang.Integer)
-	 */
 	@Override
-	public Object find(Object entityClass, Integer primaryKey) throws Exception{
+	public Object find(Object entityClass, Integer primaryKey) throws DAOException{
 		Object entity = null;
+		try {
 			session = HibernateSession.getSession();
 			entity = session.find(entityClass.getClass(), primaryKey);
-
 			if (entity != null) logger.info("Record Successfully read.");
 			else logger.info("Record not found.");
+		} catch (Exception e) {
+			throw new DAOException("ERROR:" + e.getClass() + ":" + e.getMessage());
+		}
 		return entity;
 	}
-	
-	/* (non-Javadoc)
-	 *see com.app.sms.dao.IDao#find(java.lang.Class, java.lang.String)
-	 */
+
 	@Override
-	public Object find(Class<?> entityClass, String whereClause) throws Exception {
+	public Object find(Class<?> entityClass, String whereClause) throws DAOException {
 		Object entity = null;
-		
+		try {
 			session = HibernateSession.getSession();							
-			
+			@SuppressWarnings("deprecation")
 			Query<?> query = session.createQuery("From " + entityClass.getName() + " " + whereClause); 
 			entity = query.getSingleResult();
-			
 			if (entity != null) logger.info("Record Successfully read.");
 			else logger.info("Record not found.");
+		} catch (Exception e) {
+			throw new DAOException("ERROR:" + e.getClass() + ":" + e.getMessage());
+		}
 		return entity;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Object> list(Class<?> entityClass, String whereClause) throws Exception {
+	public List<Object> list(Class<?> entityClass, String whereClause) throws DAOException {
 		List<Object> entities = null;
-		
+		try {
 			session = HibernateSession.getSession();
-
+			@SuppressWarnings("deprecation")
 			Query<?> query = session.createQuery("From " + entityClass.getName() + " " + whereClause); 
 			entities = (List<Object>) query.getResultList();
-			
+
 			if (entities != null) logger.info("Records Successfully read.");
 			else logger.info("Records not found.");
-			
+		} catch (Exception e) {
+			throw new DAOException("ERROR:" + e.getClass() + ":" + e.getMessage());
+		}
 		return entities;
 	}
-	
-	/* (non-Javadoc)
-	 *see com.app.sms.dao.IDao#list(java.lang.Class)
-	 */
+
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Object> list (Object entityClass) throws Exception{
+	public List<Object> list (Object entityClass) throws DAOException{
 		List<Object> entities = null;
-		
+		try {
 			session = HibernateSession.getSession();
+			@SuppressWarnings("deprecation")
 			Query<?> query = session.createQuery("From " + entityClass.getClass().getSimpleName());
-
 			entities = (List<Object>) query.getResultList();
 			if (entities != null) logger.info("Records Successfully read.");
 			else logger.info("Records not found.");
+		} catch (Exception e) {
+			throw new DAOException("ERROR:" + e.getClass() + ":" + e.getMessage());
+		}
 		return entities;
 	}
 
-	/* (non-Javadoc)
-	 *see com.app.sms.dao.IDao#update(java.lang.Object)
-	 */
 	@Override
-	public void update(Object entity) throws Exception{
-		
+	public void update(Object entity) throws DAOException {
+		try {
 			session = HibernateSession.getSession();
-	
 			//Creating Transaction Object  
 			transaction = session.beginTransaction();
 			logger.info("Begin transaction.");
 			session.persist(entity);
-	
 			// Transaction Is Committed To Database
 			transaction.commit();
 			logger.info("Record Successfully updated.");
+		} catch (Exception e) {
+			throw new DAOException("ERROR:" + e.getClass() + ":" + e.getMessage());
+		}
 	}
-	
-	public static void closeSession() {
-		HibernateSession.close();		
-	}
-	
+
+
 	@Override
-	public void enableAccount(Utilisateur entity) throws Exception{
+	public void enableAccount(Utilisateur entity) throws DAOException{
 		entity.setEnable(true);
 		this.update(entity);
-		
 	}
 
 	@Override
-	public void disableAccount(Utilisateur entity) throws Exception{
+	public void disableAccount(Utilisateur entity) throws DAOException{
 		entity.setEnable(false);
 		this.update(entity);
-		
 	}
 
 	@Override
-	public void associateService(Employe employe, Service service) throws Exception{
-		
+	public void associateService(Employe employe, Service service) throws DAOException{
 		service.addEmploye(employe);
 		this.update(service);
-		
 	}
 
-	
 	@Override
-	public Object validateCredential(String login, String password)  throws Exception{
+	public Object validateCredential(String login, String password)  throws DAOException{
 		Object utilisateur = null;
 		String whereClause = "where login = " + "'"+login+"'"+ " and password = " +"'"+password+"'"; 
-		
+		try {
 			session = HibernateSession.getSession();
-
 			@SuppressWarnings("deprecation")
 			Query<?> query = session.createQuery("From Utilisateur " + whereClause); 
 			utilisateur =  query.uniqueResult();
-			if (utilisateur != null) logger.info("Utilisateur trouver !");
-			else logger.info("utilisateur non");
+			if (utilisateur != null) {
+				logger.info("Utilisateur trouver !");
+				return utilisateur;
+			}		
+			else {
+				logger.info("utilisateur non");
+				return utilisateur;
+			}
+		} catch (Exception e) {
+			throw new DAOException("ERROR:" + e.getClass() + ":" + e.getMessage());
+		}
+	}
 
-		return utilisateur;
-		
+	@Override
+	public List<Object> list() throws DAOException {
+		return null;
+	}
+
+	@Override
+	public void requestResponse(Demande demande, String reponse) throws DAOException {
+		demande.setEtat(reponse);
+		this.update(demande);
 	}
 
 
-	@Override
-	public void requestResponse(Demande demande, String reponse) throws Exception {
-		demande.setEtat(reponse);
-		this.update(demande);
+	public static void closeSession() {
+		HibernateSession.close();		
 	}
 
 }
