@@ -20,7 +20,7 @@ public class Main {
 		ChefService chefService = new ChefService("BIPOMBO", "Espoir", "espoir-b", "passer");
 		
 		try {
-			
+			// Test commit
 			dao.save(chefService);
 			Service serviceEntreprise = new Service ("Service Informatique");		
 			dao.save(serviceEntreprise);
