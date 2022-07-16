@@ -31,8 +31,10 @@ public class Employe {
 	protected int id;
 	protected String nom;
 	protected String prenom;
+	
 	@Column(unique = true)
 	protected String telephone;
+	
 	@Column(unique = true)
 	protected String email;
 	protected String adresse;
@@ -50,6 +52,7 @@ public class Employe {
 	public Employe(String nom, String prenom) {
 		this.nom = nom;
 		this.prenom = prenom;
+		
 	}
 	
 	public Employe(String nom, String prenom, String telephone, String email, String adresse) {

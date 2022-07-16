@@ -9,6 +9,7 @@ import com.rekest.entities.Role;
 import com.rekest.entities.Service;
 import com.rekest.entities.employes.Administrateur;
 import com.rekest.entities.employes.ChefService;
+import com.rekest.entities.employes.Employe;
 import com.rekest.entities.employes.Utilisateur;
 
 public class Main {
@@ -17,7 +18,8 @@ public class Main {
 		
 		IDao dao = HibernateDao.getCurrentInstance();
 		ChefService chefService = new ChefService("BIPOMBO", "Espoir", "espoir-b", "passer");
-		
+		chefService.setEmail("espoir@gmail.com");
+		chefService.setTelephone("784341119");
 		try {
 			// Test commit
 			dao.save(chefService);
@@ -26,6 +28,7 @@ public class Main {
 			
 			
 			Utilisateur utilisateur = new Utilisateur("AKINOCHO", "Ghislain", "ghislain-a", "q@$$m0rb");
+			utilisateur.setEmail("gislain@gmail.com");
 			dao.save(utilisateur);
 			
 			Role gerant = new Role("Gerant system");
@@ -49,7 +52,7 @@ public class Main {
 			dao.save(seynabou);
 			
 			Demande demande = new Demande();
-			Produit bol = new Produit("Bol a café");
+			Produit bol = new Produit("Bol");
 			dao.save(bol);
 			demande.setProduit(bol);
 			seynabou.addDemandeCreee(demande);
@@ -57,7 +60,9 @@ public class Main {
 			dao.save(demande);
 			Note ras = new Note("RAS");
 			demande.addNote(ras);
-		
+			Employe emp_trouver =(Employe) dao.findUserByNumber("784341119");
+			System.out.println(emp_trouver.getNom());
+				
 			dao.requestResponse(demande,"Rejeter");
 		} catch (Exception e) {
 			e.printStackTrace();
