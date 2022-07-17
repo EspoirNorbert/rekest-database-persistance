@@ -1,6 +1,6 @@
 package com.rekest.entities;
 
-import java.sql.Date;
+import java.util.Date;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
@@ -26,10 +26,11 @@ public class Notification {
 	@Basic
 	@Temporal(TemporalType.DATE)
 	@Column(name = "created_at")
-	private Date createAt;
+	private Date createdAt;
 	
 	public Notification(String message) {
 		this.message = message;
+		this.createdAt = new java.util.Date();
 	}
 
 	public int getId() {
@@ -56,12 +57,12 @@ public class Notification {
 		this.isRead = isRead;
 	}
 
-	public Date getCreateAt() {
-		return createAt;
+	public Date getCreatedAt() {
+		return createdAt;
 	}
 
 	public void setCreateAt(Date createat) {
-		this.createAt = createat;
+		this.createdAt = createat;
 	}
 	
 }

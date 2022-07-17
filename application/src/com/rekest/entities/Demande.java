@@ -56,10 +56,12 @@ public class Demande {
 	
 	public void setId(int id) {
 		this.id = id;
+		this.updatedAt = new java.util.Date();
 	}
 	
 	public void setProduit(Produit produit) {
 		this.produit = produit;
+		this.updatedAt = new java.util.Date();
 	}
 
 	public String getEtat() {
@@ -68,6 +70,7 @@ public class Demande {
 
 	public void setEtat(String etat) {
 		this.etat = etat;
+		this.updatedAt = new java.util.Date();
 	}
 
 	public Date getCreatedAt() {
@@ -88,6 +91,7 @@ public class Demande {
 	
 	public void addNote(Note note) {
 		this.notes.add(note);
+		this.updatedAt = new java.util.Date();
 	}
 //	public void addNotification(Notification notification) {
 //		this.notifications.add(notification);

@@ -14,7 +14,6 @@ import com.rekest.entities.Service;
 import com.rekest.entities.employes.Employe;
 import com.rekest.entities.employes.Utilisateur;
 import com.rekest.exceptions.DAOException;
-import com.rekest.observableList.impl.ObservableListDepartement;
 import com.rekest.utils.HibernateSession;
 
 public class HibernateDao implements IDao{
@@ -199,6 +198,39 @@ public class HibernateDao implements IDao{
 
 	public static void closeSession() {
 		HibernateSession.close();		
+	}
+
+	@Override
+	public Object findUserByNumber(String whereClause) throws DAOException {
+		Object entity = null;
+		try {
+			session = HibernateSession.getSession();
+			@SuppressWarnings("deprecation")
+			Query<?> query = session.createQuery("From Employe where telephone = " +whereClause); 
+			entity = query.getSingleResult();
+			if (entity != null) logger.info("Record Successfully read.");
+			else logger.info("Record not found.");
+		} catch (Exception e) {
+			throw new DAOException("ERROR:" + e.getClass() + ":" + e.getMessage());
+		}
+		return entity;
+	}
+
+	@Override
+	public Object findProductByName(String whereClause) throws DAOException {
+		Object entity = null;
+		try {
+			session = HibernateSession.getSession();
+			@SuppressWarnings("deprecation")
+			Query<?> query = session.createQuery("From Produit where nom = :name");
+			query.setParameter("name", whereClause);
+			entity = query.getSingleResult();
+			if (entity != null) logger.info("Record Successfully read.");
+			else logger.info("Record not found.");
+		} catch (Exception e) {
+			throw new DAOException("ERROR:" + e.getClass() + ":" + e.getMessage());
+		}
+		return entity;
 	}
 
 }
