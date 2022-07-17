@@ -105,6 +105,10 @@ public class Utilisateur extends Employe {
 	public void addNotification (Notification notification) {
 		notifications.add(notification);
 	}
+	
+	public void removeNotification (Notification notification) {
+		notifications.remove(notification);
+	}
 
 	public Date getCreatedAt() {
 		return createdAt;
@@ -112,6 +116,11 @@ public class Utilisateur extends Employe {
 
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
+	}
+	
+	public List<Notification> getNotification(){
+		
+		return this.notifications;
 	}
 	
 }

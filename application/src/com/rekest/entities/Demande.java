@@ -93,7 +93,11 @@ public class Demande {
 		this.notes.add(note);
 		this.updatedAt = new java.util.Date();
 	}
-//	public void addNotification(Notification notification) {
-//		this.notifications.add(notification);
-//	}
+	public void addNotification(Notification notification) {
+		this.notifications.add(notification);
+	}
+	
+	public void removeNotification(Notification notification) {
+		this.notifications.remove(notification);
+	}
 }
