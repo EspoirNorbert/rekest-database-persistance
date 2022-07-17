@@ -17,6 +17,10 @@ public class Gestionnaire extends Utilisateur {
 	@JoinColumn(name="id_gestionnaire")
 	private List<Demande> demandes_assignees = new ArrayList<>();
 
+	public Gestionnaire() {
+		super();
+	}
+	
 	public Gestionnaire(String nom, String prenom, String telephone, String email, String adresse) {
 		super(nom, prenom, telephone, email, adresse);
 	}

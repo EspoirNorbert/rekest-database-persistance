@@ -32,6 +32,8 @@ public class Service {
 	@OneToOne(targetEntity=ChefService.class)
 	@JoinColumn(name = "id_chefservice")
 	private ChefService chefService;
+	
+	public Service() {}
 
 	public Service(String nom) {
 		this.nom = nom;

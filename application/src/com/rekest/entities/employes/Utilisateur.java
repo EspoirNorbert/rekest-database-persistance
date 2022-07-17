@@ -51,6 +51,10 @@ public class Utilisateur extends Employe {
 		this.createdAt = new java.util.Date();
 		Utilitaire.generateLoginAndPassword(this);
 	}
+	
+	public Utilisateur() {
+		super();
+	}
 
 	public Utilisateur(String nom, String prenom, String telephone, String email, String adresse) {
 		super(nom, prenom);

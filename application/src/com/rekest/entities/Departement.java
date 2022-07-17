@@ -32,6 +32,8 @@ public class Departement {
 	@JoinColumn(name="id_departement")
 	private List<Service> services = new ArrayList<>();
 	
+	public Departement() {}
+	
 	public Departement(String nom) {
 		this.nom = nom;
 		this.stringPropertyNom = new SimpleStringProperty(nom);
