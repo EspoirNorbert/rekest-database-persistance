@@ -60,9 +60,8 @@ public class Main {
 			dao.save(demande);
 			Note ras = new Note("RAS");
 			demande.addNote(ras);
-			Employe emp_trouver =(Employe) dao.findUserByNumber("784341119");
-			System.out.println(emp_trouver.getNom());
-				
+			infographie.setChefService(chefService);
+			System.out.println(utilisateur.getChefdeServiceId());
 			dao.requestResponse(demande,"Rejeter");
 		} catch (Exception e) {
 			e.printStackTrace();

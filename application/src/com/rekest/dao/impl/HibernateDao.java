@@ -230,5 +230,11 @@ public class HibernateDao implements IDao{
 		}
 		return entity;
 	}
+//
+//	@Override
+//	public Object getManagerIs(String whereClause) throws DAOException {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 }

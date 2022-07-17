@@ -51,6 +51,14 @@ public interface IDao {
 	 * @ 
 	 */
 	public Object findProductByName(String whereClause) throws DAOException ;
+	/** Find entity by clause
+	 * @param entityClass
+	 * @param whereClause
+	 * @return
+	 * @throws DAOException 
+	 * @ 
+	 */
+	//public Object getManagerIs(String whereClause) throws DAOException ;
 	
 	/** Find entity by clause
 	 * @param entityClass
