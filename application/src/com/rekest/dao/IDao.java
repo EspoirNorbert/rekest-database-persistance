@@ -3,11 +3,13 @@ package com.rekest.dao;
 import java.util.List;
 
 import com.rekest.entities.Demande;
-import com.rekest.entities.Produit;
+import com.rekest.entities.Departement;
 import com.rekest.entities.Service;
 import com.rekest.entities.employes.Employe;
 import com.rekest.entities.employes.Utilisateur;
 import com.rekest.exceptions.DAOException;
+
+import javafx.collections.ObservableList;
 
 
 /**
@@ -132,11 +134,6 @@ public interface IDao {
 	 */
 	public default void associateService(Employe employe, Service service) throws DAOException{};
 
-	/**
-	 * Refresh Observable list
-	*/
-	public default void refresh() {}
-
 
 	/**
 	 * Definir la reponse de la demande (rejeter , clotur�e ...)
@@ -146,4 +143,11 @@ public interface IDao {
 	 */
 	public void requestResponse(Demande demande, String reponse) throws DAOException;
 	
+	/**
+	 * @return
+	 * @throws DAOException
+	 */
+	public default ObservableList<Departement> departementlistObservable() throws DAOException {
+		return null;
+	}
 }

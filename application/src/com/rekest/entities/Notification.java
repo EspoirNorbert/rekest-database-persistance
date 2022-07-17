@@ -28,6 +28,8 @@ public class Notification {
 	@Column(name = "created_at")
 	private Date createdAt;
 	
+	public Notification() {}
+	
 	public Notification(String message) {
 		this.message = message;
 		this.createdAt = new java.util.Date();

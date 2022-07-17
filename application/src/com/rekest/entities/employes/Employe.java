@@ -49,10 +49,11 @@ public class Employe {
 	@Transient
 	private Service service;
 	
+	public Employe() {}
+	
 	public Employe(String nom, String prenom) {
 		this.nom = nom;
 		this.prenom = prenom;
-		
 	}
 	
 	public Employe(String nom, String prenom, String telephone, String email, String adresse) {
@@ -62,8 +63,6 @@ public class Employe {
 		this.email = email;
 		this.adresse = adresse;
 	}
-	
-
 	
 	public int getId() {
 		return id;
@@ -123,4 +122,5 @@ public class Employe {
 	}
 	
 	public static void copy(Employe employe, Employe entity) {}
+	
 }

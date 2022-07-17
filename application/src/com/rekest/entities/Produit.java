@@ -19,6 +19,8 @@ public class Produit {
 	private String type;
 	private String description;
 	
+	public Produit() {}
+	
 	public Produit(String nom) {
 		this.nom = nom;
 	}

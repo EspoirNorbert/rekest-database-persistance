@@ -5,6 +5,10 @@ import jakarta.persistence.Entity;
 @Entity
 public class DirecteurGeneral extends Manager {
 	
+	public DirecteurGeneral() {
+		super();
+	}
+	
 	public DirecteurGeneral(String nom, String prenom, String telephone, String email, String adresse) {
 		super(nom, prenom, telephone, email, adresse);
 	}

@@ -10,7 +10,6 @@ import org.hibernate.query.Query;
 
 import com.rekest.dao.IDao;
 import com.rekest.entities.Demande;
-import com.rekest.entities.Produit;
 import com.rekest.entities.Service;
 import com.rekest.entities.employes.Employe;
 import com.rekest.entities.employes.Utilisateur;
@@ -24,8 +23,9 @@ public class HibernateDao implements IDao{
 	private static Session session = null;
 	private static Transaction transaction = null;
 	private static HibernateDao daoInstance = null;
+	
 
-	private HibernateDao() {}
+	protected HibernateDao() {}
 
 	public static HibernateDao getCurrentInstance () {
 		if (daoInstance == null) daoInstance = new HibernateDao();
@@ -40,6 +40,8 @@ public class HibernateDao implements IDao{
 			logger.info("Begin transaction.");// begin transaction
 			session.persist(entity);
 			transaction.commit();
+			
+		
 			logger.info("Record is Successully created");  //  end transaction
 		} catch (Exception e) {
 			throw new DAOException("ERROR:" + e.getClass() + ":" + e.getMessage());
