@@ -35,7 +35,6 @@ public class Main {
 			Utilisateur utilisateur = new Utilisateur("AKINOCHO", "Ghislain", "ghislain-a", "q@$$m0rb");
 			utilisateur.setEmail("gislain@gmail.com");
 			dao.save(utilisateur);
-			
 			Role gerant = new Role("Gerant system");
 			Role superviseur = new Role("Superviseur system");
 			dao.save(superviseur);
@@ -77,18 +76,7 @@ public class Main {
 			infographie.setChefService(chefService);
 			System.out.println(utilisateur.getChefdeServiceId());
 			dao.requestResponse(demande,"Rejeter");
-			
-			daonotification.createNotification(chefService, demande,"Vous avez une nouvelle notification pour une demande de bol");
-			daonotification.createNotification(chefService, demande1,"Vous avez une nouvelle notification pour une demande de climatiseur");
-			
-			List<Notification> list_notif = new ArrayList<>();
-			list_notif = chefService.getNotification();
-			for (Notification obj : list_notif) {
-				System.out.println(obj.getMessage());
-				if(!obj.isRead())
-					daonotification.isRead(obj);
-				daonotification.deleteNotification(obj,chefService,demande);
-			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
