@@ -17,6 +17,7 @@
 		<mapping  class="com.rekest.entities.employes.Administrateur" />
 		<mapping  class="com.rekest.entities.employes.Manager" />	
 		<mapping  class="com.rekest.entities.employes.ChefService" />
+		<mapping  class="com.rekest.entities.employes.ChefDepartement" />
 		<mapping  class="com.rekest.entities.employes.Directeur" />
 		<mapping  class="com.rekest.entities.employes.DirecteurGeneral" />
 		<mapping  class="com.rekest.entities.Demande" />
