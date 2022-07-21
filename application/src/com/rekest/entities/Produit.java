@@ -13,7 +13,9 @@ public class Produit {
 	@Column(name="id_produit")
 	private int id;
 	
+	@Column(unique=true)
 	private String nom;
+	
 	private double prix;
 	private int quantite;
 	private String type;

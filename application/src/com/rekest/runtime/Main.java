@@ -1,17 +1,15 @@
 package com.rekest.runtime;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.rekest.dao.IDao;
 import com.rekest.dao.impl.HibernateDao;
 import com.rekest.entities.Demande;
+import com.rekest.entities.Departement;
 import com.rekest.entities.Note;
-import com.rekest.entities.Notification;
 import com.rekest.entities.Produit;
 import com.rekest.entities.Role;
 import com.rekest.entities.Service;
 import com.rekest.entities.employes.Administrateur;
+import com.rekest.entities.employes.ChefDepartement;
 import com.rekest.entities.employes.ChefService;
 import com.rekest.entities.employes.Utilisateur;
 import com.rekest.notificationmanager.impl.NotificationManager;
@@ -46,6 +44,7 @@ public class Main {
 			
 			dao.associateService(utilisateur, serviceEntreprise);
 			Service infographie = new Service("Infographie");
+			
 			dao.associateService(utilisateur, infographie);
 			dao.associateService(chefService, infographie);
 			
@@ -70,7 +69,12 @@ public class Main {
 			seynabou.addDemandeCreee(demande1);
 			seynabou.addDemandeSoumise(demande1);
 			dao.save(demande1);
-			
+			Departement IT = new Departement("IT");
+			dao.save(IT);
+			dao.associateDepartement(serviceEntreprise, IT);
+			ChefDepartement eunicia = new ChefDepartement("DAGA", "Eunicia", "eunicia", "passer");
+			dao.save(eunicia);
+			IT.setChefDepartement(eunicia);
 			Note ras = new Note("RAS");
 			demande.addNote(ras);
 			infographie.setChefService(chefService);

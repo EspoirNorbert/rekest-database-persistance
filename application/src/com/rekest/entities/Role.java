@@ -14,6 +14,7 @@ public class Role {
 	@Column(name="id_role")
 	private int id;
 	
+	@Column(unique=true)
 	private String intitule;
 	
 	public Role() {}

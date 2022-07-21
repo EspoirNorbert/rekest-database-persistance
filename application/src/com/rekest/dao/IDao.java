@@ -16,6 +16,10 @@ import javafx.collections.ObservableList;
  * @author Illiassou
  *
  */
+/**
+ * @author illiassou
+ *
+ */
 public interface IDao {
 
 	/**
@@ -53,14 +57,6 @@ public interface IDao {
 	 * @ 
 	 */
 	public Object findProductByName(String whereClause) throws DAOException ;
-	/** Find entity by clause
-	 * @param entityClass
-	 * @param whereClause
-	 * @return
-	 * @throws DAOException 
-	 * @ 
-	 */
-	//public Object getManagerIs(String whereClause) throws DAOException ;
 	
 	/** Find entity by clause
 	 * @param entityClass
@@ -126,14 +122,16 @@ public interface IDao {
 	 */
 	public default void disableAccount(Utilisateur entity) throws DAOException{};
 
-	/**
-	 * Associate an employe to a service
-	 * @param employe
-	 * @param service
-	 * @throws DAOException
-	 */
+	
+	
 	public default void associateService(Employe employe, Service service) throws DAOException{};
 
+	/**
+	 * @param employe
+	 * @param departement
+	 * @throws DAOException
+	 */
+	public default void associateDepartement(Service service, Departement departement) throws DAOException{};
 
 	/**
 	 * Definir la reponse de la demande (rejeter , clotur�e ...)

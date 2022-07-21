@@ -23,6 +23,8 @@ public class Service {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	@Column(name="id_service")
 	private int id;
+	
+	@Column(unique=true)
 	private String nom;
 
 	@OneToMany(cascade=CascadeType.ALL)
@@ -59,6 +61,9 @@ public class Service {
 		employes.add(employe);	
 	}
 
+	public void removeEmploye(Employe employe) {
+		employes.remove(employe);
+	}
 	public ChefService getChefService() {
 		return chefService;
 	}

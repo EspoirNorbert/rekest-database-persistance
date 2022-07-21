@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.rekest.entities.employes.ChefDepartement;
+import com.rekest.entities.employes.Employe;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -26,6 +27,7 @@ public class Departement {
 	@Column(name="id_departement")
 	private int id;
 	
+	@Column(unique=true)
 	private String nom;
 	
 	@Transient
@@ -65,7 +67,15 @@ public class Departement {
 		return chefDepartement;
 	}
 
-	public void setChefService(ChefDepartement chefDepartement) {
+	public void addService(Service service) {
+		services.add(service);	
+	}
+
+	public void removeService(Service service) {
+		services.remove(service);
+	}
+	
+	public void setChefDepartement(ChefDepartement chefDepartement) {
 		this.chefDepartement = chefDepartement;
 	}
 	public static void copy(Departement oldDepartement, Departement newDepartment) {
