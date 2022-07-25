@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.rekest.entities.employes.ChefDepartement;
-import com.rekest.entities.employes.Employe;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

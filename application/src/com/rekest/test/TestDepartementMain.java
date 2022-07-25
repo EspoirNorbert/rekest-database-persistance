@@ -14,6 +14,7 @@ public class TestDepartementMain {
 		// TODO Auto-generated method stub
 		IDao dao = HibernateDao.getCurrentInstance();
 		Departement IT = new Departement("IT");
+		Departement IT_prime = new Departement("IT");
 		try {
 			ChefService espoir = new ChefService("NORBERT", "Espoir", "eunicia", "passer");
 			dao.save(espoir);
@@ -25,6 +26,7 @@ public class TestDepartementMain {
 			dao.save(eunicia);
 			IT.setChefDepartement(eunicia);
 			dao.save(IT);
+			dao.save(IT_prime);
 		} catch (DAOException e) {
 			
 			e.printStackTrace();
