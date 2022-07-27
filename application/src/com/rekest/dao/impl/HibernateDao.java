@@ -169,21 +169,21 @@ public class HibernateDao implements IDao{
 	}
 
 	@Override
-	public Object validateCredential(String login, String password)  throws DAOException{
-		Object utilisateur = null;
+	public Utilisateur validateCredential(String login, String password)  throws DAOException{
+		Utilisateur utilisateur = null;
 		String whereClause = "where login = " + "'"+login+"'"+ " and password = " +"'"+password+"'"; 
 		try {
 			session = HibernateSession.getSession();
 			@SuppressWarnings("deprecation")
 			Query<?> query = session.createQuery("From Utilisateur " + whereClause); 
-			utilisateur =  query.uniqueResult();
-			if (utilisateur != null) {
+			utilisateur =  (Utilisateur) query.uniqueResult();
+			if (utilisateur != null  && utilisateur.isEnable()) {
 				logger.info("Utilisateur trouver !");
 				return utilisateur;
 			}		
 			else {
-				logger.info("utilisateur non");
-				return utilisateur;
+				logger.info("Utilisateur non trouvé !");
+				return null;
 			}
 		} catch (Exception e) {
 			throw new DAOException("ERROR:" + e.getClass() + ":" + e.getMessage());
